@@ -12,7 +12,7 @@
             "console": "integratedTerminal",
             "env": {"VEACHRON_ELASTIC": "localhost"},
             "justMyCode": true,
-            "cwd": "${workspaceFolder}/src"
+            "cwd": "${workspaceFolder}/src/veachron"
         }
     ]
 }
