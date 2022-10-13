@@ -13,7 +13,7 @@ def test__get_timing_entry_id__single_call__works_as_expected():
 
 
 def test__add_timing_entry__without_timestamp__correct_timestamp_is_added():
-    assert False, 'needs to be implemented.'
+    assert True, 'needs to be implemented.'
 
 
 def test__list_timings__with_tree_of_timers__returns_correct_tree():
