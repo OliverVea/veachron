@@ -1,11 +1,11 @@
 from pytest import fixture
-from core.timing import TimerTree
-from application.timing import add_timing_entry, add_timing_exit, list_timings, get_timing_entry_id
-import persistence
+from veachron.core.timing import TimerTree
+from veachron.application.timing import add_timing_entry, add_timing_exit, list_timings, get_timing_entry_id
+import veachron.persistence
 
 @fixture(autouse=True)
 def empty_timers():
-    persistence.timers = {}
+    veachron.persistence.timers = {}
 
 def test__get_timing_entry_id__single_call__works_as_expected():
     result = get_timing_entry_id()
@@ -13,7 +13,7 @@ def test__get_timing_entry_id__single_call__works_as_expected():
 
 
 def test__add_timing_entry__without_timestamp__correct_timestamp_is_added():
-    assert True, 'needs to be implemented.'
+    assert False, 'needs to be implemented.'
 
 
 def test__list_timings__with_tree_of_timers__returns_correct_tree():

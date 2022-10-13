@@ -10,5 +10,5 @@ api_extension = Api(
     doc='/swagger'
 )
 
-from presentation.api.timings import namespace as timings
+from veachron.presentation.api.timings import namespace as timings
 api_extension.add_namespace(timings)

@@ -1,4 +1,4 @@
-from core.timing import Timer
+from veachron.core.timing import Timer
 
 timers: dict[str, Timer] = {}
 
