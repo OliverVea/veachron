@@ -5,14 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "veachron",
             "type": "python",
             "request": "launch",
-            "program": "main.py",
-            "console": "integratedTerminal",
-            "env": {"VEACHRON_ELASTIC": "localhost"},
+            "module": "veachron",
             "justMyCode": true,
-            "cwd": "${workspaceFolder}/src"
+            "cwd": "${workspaceFolder}/src/veachron"
         }
     ]
 }

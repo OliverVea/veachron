@@ -1,7 +1,7 @@
-from application.timing import add_timing_entry, add_timing_exit, list_timings
+from veachron.application.timing import add_timing_entry, add_timing_exit, list_timings
 
-from presentation.api.timings import namespace
-from presentation.api.timings.models import *
+from veachron.presentation.api.timings import namespace
+from veachron.presentation.api.timings.models import *
 
 from flask import request
 from flask_restx import Resource

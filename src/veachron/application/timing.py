@@ -1,6 +1,6 @@
 from string import ascii_letters
-import persistence
-from core.timing import Timer, Timing, TimerTree
+import veachron.persistence
+from veachron.core.timing import Timer, Timing, TimerTree
 
 import time
 import random
@@ -19,10 +19,10 @@ def add_timing_entry(
     if not timing_id: timing_id = get_timing_entry_id()
     if not timestamp: timestamp = int(time.time() * 1000)
     
-    timer = persistence.get_timer(timer_id)
+    timer = veachron.persistence.get_timer(timer_id)
     timer = timer if timer else Timer(id=timer_id, parent_id=timer_parent_id)
     timer.timings[timing_id] = Timing(id=timing_id, entry=timestamp)
-    persistence.set_timer(timer)
+    veachron.persistence.set_timer(timer)
 
     return timing_id
 
@@ -34,15 +34,16 @@ def add_timing_exit(
 
     if not timestamp: timestamp = int(time.time() * 1000)
         
-    timer = persistence.get_timer(timer_id)
+    timer = veachron.persistence.get_timer(timer_id)
     if not timer or not timing_id in timer.timings: return
 
     timer.timings[timing_id].exit = timestamp
-    persistence.set_timer(timer)
+    veachron.persistence.set_timer(timer)
 
 
 def list_timings(timer_id: str | None = None) -> list[TimerTree]:
-    timers_by_id = {timer.id: timer for timer in persistence.list_timers()}
+    timers_by_id = {
+        timer.id: timer for timer in veachron.persistence.list_timers()}
     timers = lambda: timers_by_id.values()
 
     timer_trees_by_id = {timer.id: TimerTree(timer.id, timer.parent_id, timer.time()) for timer in timers()}

@@ -1,4 +1,4 @@
-from presentation.api.timings import namespace
+from veachron.presentation.api.timings import namespace
 from flask_restx import fields
 
 add_timing_entry_request_model = namespace.model('AddTimingEntry', {
