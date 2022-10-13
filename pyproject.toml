@@ -8,9 +8,9 @@ version = "0.0.1"
 authors = [
   { name="Oliver Vea", email="oliver.vea@gmail.com" },
 ]
-description = "A small example package"
+description = "Appication for tracking and displaying timings primarily for use inline in code."
 readme = "readme.md"
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
