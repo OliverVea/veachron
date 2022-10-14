@@ -3,7 +3,7 @@ version: '3.8'
 services:
  webserver:
   build:
-   context: ./src
+   context: ./
   ports:
    - 80:5000
   volumes:
