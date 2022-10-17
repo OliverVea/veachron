@@ -9,4 +9,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./src .
 
+WORKDIR /usr/src/app/src
+
 CMD [ "python3", "-m", "veachron" ]
