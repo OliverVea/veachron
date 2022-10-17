@@ -8,6 +8,6 @@ COPY ./src/veachron/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 WORKDIR /usr/src/app/src
-COPY ./src/veachron .
+COPY ./src .
 
 CMD [ "python3", "-m", "veachron" ]
