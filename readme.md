@@ -40,6 +40,9 @@ These are the current future goals for veachron in chronological order.
 1. Deploy to AWS ECS
 
 ## Other Goals ##
+1. Adding configuration through .env file
+   1. Import in docker-compose.yml
+   1. Import in python module using load_env()
 1. Github version number generation
 1. Console app for showing timings
 1. SQL Persistence layer
