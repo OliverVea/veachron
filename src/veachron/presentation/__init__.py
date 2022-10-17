@@ -20,5 +20,3 @@ def main():
             app.run(host='0.0.0.0', debug=True)
         except SystemExit:
             pass
-        except Exception:
-            break
