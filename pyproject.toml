@@ -21,4 +21,4 @@ classifiers = [
 "Github" = "https://github.com/OliverVea/veachron"
 
 [tool.pytest.ini_options]
-pythonpath = "src"
+pythonpath = "./veachron"
