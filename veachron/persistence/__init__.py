@@ -8,4 +8,4 @@ def list_timers() -> list[Timer]:
     return db.list_timers()
 
 def set_timer(timer: Timer) -> None:
-    db.set_timer(timer)
+    db.set_timer(timer.id, timer)
