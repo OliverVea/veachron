@@ -3,7 +3,7 @@ from veachron.application.timing import add_timing_entry, add_timing_exit, list_
 from veachron.presentation.api.timings import namespace
 from veachron.presentation.api.timings.models import *
 
-from flask import request
+from flask import request, jsonify
 from flask_restx import Resource
 
 def _get_or_none(source, key: str):
@@ -36,4 +36,7 @@ class AddExit(Resource):
 @namespace.route('/list_timings')
 class ListTimings(Resource):
     def get(self):
-        return list_timings("A")
+        trees = list_timings()
+        response = jsonify([tree.to_json() for tree in trees])
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response

@@ -1,12 +1,11 @@
 from veachron.core.timing import Timer
-
-timers: dict[str, Timer] = {}
-
-def set_timer(timer: Timer) -> None:
-    timers[timer.id] = timer
+import veachron.persistence.postgresql as db
 
 def get_timer(timer_id: str) -> Timer | None:
-    return timers.get(timer_id, None)
+    db.get_timer(timer_id)
 
 def list_timers() -> list[Timer]:
-    return list(timers.values())
+    return db.list_timers()
+
+def set_timer(timer: Timer) -> None:
+    db.set_timer(timer)

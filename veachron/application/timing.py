@@ -46,6 +46,9 @@ def list_timings(timer_id: str | None = None) -> list[TimerTree]:
         timer.id: timer for timer in veachron.persistence.list_timers()}
     timers = lambda: timers_by_id.values()
 
+    for timer in timers():
+        print(timer)
+
     timer_trees_by_id = {timer.id: TimerTree(timer.id, timer.parent_id, timer.time()) for timer in timers()}
     timer_trees = lambda: timer_trees_by_id.values()
     
@@ -66,5 +69,5 @@ def list_timings(timer_id: str | None = None) -> list[TimerTree]:
         
         if len(timer_trees_by_id) == 0:
             break
-    
+
     return trees

@@ -28,3 +28,11 @@ class TimerTree:
     parent_id: str | None = None
     total_time: int = 0
     children: list[TimerTree] = field(default_factory=list)
+
+    def to_json(self) -> dict:
+        return {
+            'timer_id': self.timer_id,
+            'parent_id': self.parent_id,
+            'total_time': self.total_time,
+            'children': [child.to_json() for child in self.children]
+        }
