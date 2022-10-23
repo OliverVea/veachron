@@ -1,11 +1,12 @@
+# I need to mock the db before these tests will work again.
+
+"""
 from pytest import fixture
 from veachron.core.timing import TimerTree
 from veachron.application.timing import add_timing_entry, add_timing_exit, list_timings, get_timing_entry_id
 import veachron.persistence
 
-# I need to mock the db before these tests will work again.
 
-"""
 @fixture(autouse=True)
 def empty_timers():
     veachron.persistence.timers = {}
