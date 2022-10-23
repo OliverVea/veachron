@@ -3,8 +3,11 @@ from veachron.core.constants import LOGGER_NAME
 import veachron.persistence.postgresql as postgresql
 
 import logging
+import importlib.resources as resources
 
 logger = logging.getLogger(LOGGER_NAME)
+
+INSERT_TIMING = resources.read_text('veachron.persistence.postgresql.commands', 'insert_timing.sql')
 
 def _map_timing(data: tuple[str] | None) -> Timing:
     if not data: return None
@@ -12,10 +15,8 @@ def _map_timing(data: tuple[str] | None) -> Timing:
     return Timing(id=timing_id, timer_id=timer_id, entry=entry, exit=exit)
 
 def set_timings(timings: list[Timing]) -> None:
-    query = "INSERT INTO timing(timing_id, timer_id, entry, exit) VALUES(%(timing_id)s, %(timer_id)s, %(entry)s, %(exit)s)"
     data = [{'timing_id': timing.id, 'timer_id': timing.timer_id, 'entry': timing.entry, 'exit': timing.exit} for timing in timings]
-
-    cursor = postgresql.execute_many(query, data)
+    cursor = postgresql.execute_many(INSERT_TIMING, data)
     
     if not cursor: 
         return

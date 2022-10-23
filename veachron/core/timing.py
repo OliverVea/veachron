@@ -6,10 +6,10 @@ from dataclasses import dataclass, field
 class Timing:
     id: str
     timer_id: str 
-    entry: int
-    exit: int | None = None
+    entry: float
+    exit: float | None = None
 
-    def time(self) -> int:
+    def time(self) -> float:
         if self.exit == None: return 0
         return self.exit - self.entry
 
@@ -20,14 +20,14 @@ class Timer:
     timings: dict[str, Timing] = field(default_factory=dict)
     display_name: str = ""
 
-    def time(self) -> int:
+    def time(self) -> float:
         return sum(timing.time() for timing in self.timings.values())
 
 @dataclass
 class TimerTree:
     timer_id: str
     parent_id: str | None = None
-    total_time: int = 0
+    total_time: float = 0
     children: list[TimerTree] = field(default_factory=list)
 
     def to_json(self) -> dict:

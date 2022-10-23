@@ -14,11 +14,11 @@ def add_timing_entry(
         timer_id: str,
         timer_parent_id: str | None = None, 
         timing_id: str | None = None, 
-        timestamp: int | None = None,
+        timestamp: float | None = None,
         display_name: str | None = None) -> str:
     
     if not timing_id: timing_id = get_timing_entry_id()
-    if not timestamp: timestamp = int(time.time() * 1000)
+    if not timestamp: timestamp = time.time()
 
     timer = db.get_timer(timer_id)
 
@@ -36,9 +36,9 @@ def add_timing_entry(
 def add_timing_exit(
         timer_id: str,
         timing_id: str,
-        timestamp: int | None = None):
+        timestamp: float | None = None):
 
-    if not timestamp: timestamp = int(time.time() * 1000)
+    if not timestamp: timestamp = time.time()
         
     timer = db.get_timer(timer_id)
     if not timer or not timing_id in timer.timings: return

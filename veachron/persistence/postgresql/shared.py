@@ -48,6 +48,11 @@ def execute(query: str, data: dict[str, str] = None, cursor = None, db = None):
     Returns db cursor on success and none on failure.
     """
     if not data: data = {}
+    q = query
+    for key, value in zip(data.keys(), data.values()):
+        key = f'%({key})s'
+        q = q.replace(key, f'\'{value}\'')
+    logger.debug(q)
     try:
         if not cursor: cursor = db.cursor()
         result = cursor.execute(query, data)
@@ -66,6 +71,13 @@ def execute_many(query: str, data: list[dict[str, str]] = None, cursor = None, d
     Returns db cursor on success and none on failure.
     """
     if not data: data = []
+    for d in data:
+        q = query
+        for key, value in zip(d.keys(), d.values()):
+            key = f'%({key})s'
+            q = q.replace(key, f'\'{value}\'')
+        logger.debug(q)
+
     try:
         if not cursor: cursor = db.cursor()
         result = cursor.executemany(query, data)

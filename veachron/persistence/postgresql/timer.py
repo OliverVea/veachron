@@ -2,11 +2,14 @@ from veachron.core.timing import Timer, Timing
 from veachron.core.constants import LOGGER_NAME
 
 import veachron.persistence.postgresql as postgresql
+import importlib.resources as resources
 from veachron.persistence.postgresql.timing import set_timings, list_timings, get_timings_for_timer
 
 import logging
 
 logger = logging.getLogger(LOGGER_NAME)
+
+INSERT_TIMER = resources.read_text('veachron.persistence.postgresql.commands', 'insert_timer.sql')
 
 def _map_timer(data: tuple[str] | None, timings: dict[str, Timing] | None = None) -> Timer:
     if not data: return None
@@ -18,19 +21,11 @@ def _map_timer(data: tuple[str] | None, timings: dict[str, Timing] | None = None
 def set_timer(timer: Timer) -> None:
     """
     Used to insert a Timer into the database.
-    If a timer already exists with the Timer.id, it is replaced.
+    If a timer already exists with the Timer.id, it is updated.
     The Timer.timings are also saved to the timing table.
     """
-    delete_query = "DELETE FROM timer WHERE timer_id=%(timer_id)s"
-    delete_data = {'timer_id': timer.id}
-    cursor = postgresql.execute(delete_query, delete_data)
-
-    if not cursor:
-        return
-
-    insert_query = "INSERT INTO timer(timer_id, parent_id, display_name) VALUES(%(timer_id)s, %(parent_id)s, %(display_name)s)"
     insert_data = {'timer_id': timer.id, 'parent_id': timer.parent_id, 'display_name': timer.display_name}
-    cursor = postgresql.execute(insert_query, insert_data, cursor)
+    cursor = postgresql.execute(INSERT_TIMER, insert_data)
 
     result = postgresql.commit(cursor)
 
