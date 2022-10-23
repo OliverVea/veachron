@@ -5,6 +5,7 @@ from dataclasses import dataclass, field
 @dataclass
 class Timing:
     id: str
+    timer_id: str 
     entry: int
     exit: int | None = None
 

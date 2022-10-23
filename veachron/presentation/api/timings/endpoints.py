@@ -18,7 +18,8 @@ class AddEntry(Resource):
             timer_id=request.json['timerId'],
             timer_parent_id=_get_or_none(request.json, 'timerParentId'),
             timing_id=_get_or_none(request.json, 'timingId'),
-            timestamp=_get_or_none(request.json, 'timestamp'))
+            timestamp=_get_or_none(request.json, 'timestamp'),
+            display_name=_get_or_none(request.json, 'displayName'))
 
         return {'timingId': timing_entry_id}
 
@@ -33,7 +34,7 @@ class AddExit(Resource):
             timestamp=_get_or_none(request.json, 'timestamp'))
 
 
-@namespace.route('/list_timings')
+@namespace.route('/list-timings')
 class ListTimings(Resource):
     def get(self):
         trees = list_timings()
