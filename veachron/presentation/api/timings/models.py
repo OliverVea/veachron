@@ -10,7 +10,7 @@ add_timing_entry_request_model = namespace.model('AddTimingEntry', {
 })
 
 add_timing_entry_response_model = namespace.model('AddTimingEntryResponse', {
-    'timingId': fields.String(required=False, description='Used to match the entry with an exit. If not set, a randomly generated one will be returned.')
+    'timingId': fields.String(description='Used to match the entry with an exit. If not set, a randomly generated one will be returned.')
 })
 
 add_timing_exit_request_model = namespace.model('AddTimingExit', {
@@ -18,3 +18,13 @@ add_timing_exit_request_model = namespace.model('AddTimingExit', {
     'timingId': fields.String(required=True, description='Used to match the exit with an entry.'),
     'timestamp': fields.Float(required=True, description='Timestamp of the exit.')
 })
+
+list_timers_response_model = namespace.model('ListTimersResponse', {
+    'timerId': fields.String(),
+    'parentId': fields.String(required=False),
+    'displayName': fields.String(),
+    'totalTime': fields.Float(),
+    'totalPercentage': fields.Float()
+})
+
+list_timers_response_model['children'] = fields.List(fields.Nested(list_timers_response_model), default=[])

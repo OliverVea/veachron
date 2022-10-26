@@ -12,8 +12,9 @@ def _close_db_connection():
     try:
         _db.close()
         _db = None
-    except psycopg2.OperationalError as e:
+    except Exception as e:
         logger.critical('Failed closing connection to the database with the message:\n%s', e)
+        exit()
 
 def _get_db_connection():
     try:

@@ -5,13 +5,14 @@ services:
     build:
       context: ./
     ports:
-      - 80:5000
+      - 5000:5000
     volumes:
       - ./:/usr/src/app
     environment:
       DB_HOST: db
       DB_USER: user
       DB_PASSWORD: password
+      LOG_LEVEL: WARNING
 
   db:
     image: postgres

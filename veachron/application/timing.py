@@ -54,7 +54,7 @@ def list_timings(timer_id: str | None = None) -> list[TimerTree]:
     for timer in timers():
         print(timer)
 
-    timer_trees_by_id = {timer.id: TimerTree(timer.id, timer.parent_id, timer.time()) for timer in timers()}
+    timer_trees_by_id = {timer.id: TimerTree(timer.id, timer.parent_id, timer.display_name, timer.time()) for timer in timers()}
     timer_trees = lambda: timer_trees_by_id.values()
     
     trees = []

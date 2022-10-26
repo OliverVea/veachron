@@ -27,8 +27,12 @@ class Timer:
 class TimerTree:
     timer_id: str
     parent_id: str | None = None
+    display_name: str = None,
     total_time: float = 0
     children: list[TimerTree] = field(default_factory=list)
+
+    def __post_init__(self):
+        if not self.display_name: self.display_name = self.timer_id
 
     def to_json(self) -> dict:
         return {

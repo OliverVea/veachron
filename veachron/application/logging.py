@@ -1,6 +1,7 @@
 from veachron.core.constants import LOGGER_NAME
 
 import logging.config
+import os
 
 LOGGING_CONFIGURATION = {
     'version': 1,
@@ -19,7 +20,7 @@ LOGGING_CONFIGURATION = {
     'loggers': {
         LOGGER_NAME: {
             'handlers': ['stdout'],
-            'level': 'DEBUG',
+            'level': os.environ.get('LOG_LEVEL', default='INFORMATION'),
             'propagate': True
         }
     }

@@ -15,7 +15,8 @@
                 "DB_HOST": "localhost",
                 "DB_USER": "user",
                 "DB_PASSWORD": "password",
-                "LOG_PATH": "./logs/veachron.log"
+                "LOG_PATH": "./logs/veachron.log",
+                "LOG_LEVEL": "DEBUG"
             }
         }
     ]
