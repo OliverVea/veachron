@@ -20,7 +20,7 @@ LOGGING_CONFIGURATION = {
     'loggers': {
         LOGGER_NAME: {
             'handlers': ['stdout'],
-            'level': os.environ.get('LOG_LEVEL', default='INFORMATION'),
+            'level': os.environ.get('LOG_LEVEL', default='WARNING'),
             'propagate': True
         }
     }

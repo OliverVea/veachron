@@ -20,9 +20,9 @@ def _get_db_connection():
     try:
         db = psycopg2.connect(
             database='veachron',
-            host=os.environ['DB_HOST'], 
-            user=os.environ['DB_USER'],
-            password=os.environ['DB_PASSWORD'])
+            host=os.environ.get('DB_HOST', 'localhost'), 
+            user=os.environ.get('DB_USER', 'user'),
+            password=os.environ.get('DB_PASSWORD', 'password'))
         logger.info('Connected successfully to database!')
         return db
 
