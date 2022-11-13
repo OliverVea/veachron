@@ -46,7 +46,7 @@ def map_timer_tree(tree: TimerTree, scaling: float):
 
 @namespace.route('/list-timings')
 class ListTimings(Resource):
-    #@namespace.marshal_with(list_timers_response_model)
+    #@namespace.marshal_with(list_timers_response_model) Causes CORS problems
     def get(self):
         trees = list_timings()
         scaling = sum(tree.total_time for tree in trees)

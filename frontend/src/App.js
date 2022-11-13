@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import TimerListElement from './components/TimerListElement';
 
 function App() {
-  const url = 'http://localhost:5000/api/timings/list-timings'
+  const hostname = 'http://api.localhost'
+  const url = hostname + '/api/timings/list-timings'
   const [timings, setTimings] = useState([{}])
 
   useEffect(() => {

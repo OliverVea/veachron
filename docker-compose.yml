@@ -2,10 +2,10 @@ version: '3.8'
 
 services:
   api:
+    image: olivervea/veachron-api:latest
     build:
-      context: ./
-    ports:
-      - 5000:5000
+      context: .
+      dockerfile: Api.Dockerfile
     volumes:
       - ./:/usr/src/app
     environment:
@@ -13,6 +13,12 @@ services:
       DB_USER: user
       DB_PASSWORD: password
       LOG_LEVEL: WARNING
+
+  ui:
+    image: olivervea/veachron-ui:latest
+    build:
+      context: .
+      dockerfile: Ui.Dockerfile
 
   db:
     image: postgres
@@ -23,8 +29,6 @@ services:
       POSTGRES_DB: veachron
     volumes:
     - postgresql:/var/lib/postgresql/data
-    ports:
-    - 5432:5432
 
   pgadmin:
     image: dpage/pgadmin4
@@ -32,10 +36,17 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: root
-    ports:
-    - 5050:80
     volumes:
     - pgadmin:/var/lib/pgadmin
+
+  nginx:
+    image: nginx:1.21
+    platform: linux
+    ports:
+      - 80:80
+    restart: on-failure
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
 
 volumes:
   postgresql:
