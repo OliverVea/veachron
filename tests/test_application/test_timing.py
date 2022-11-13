@@ -9,8 +9,8 @@ import os
 @fixture(autouse=True)
 def set_db_connection():
     os.environ.setdefault('DB_HOST', 'localhost')
-    os.environ['DB_USER'] = 'user'
-    os.environ['DB_PASSWORD'] = 'password'
+    os.environ.setdefault('DB_USER', 'user')
+    os.environ.setdefault('DB_PASSWORD', 'password')
 
     clear_database()
     initialize_database()
