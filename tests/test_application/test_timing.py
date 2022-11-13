@@ -1,15 +1,19 @@
-# I need to mock the db before these tests will work again.
-
-"""
 from pytest import fixture
 from veachron.core.timing import TimerTree
 from veachron.application.timing import add_timing_entry, add_timing_exit, list_timings, get_timing_entry_id
-import veachron.persistence
 
+from veachron.persistence.postgresql.initialization import initialize_database, clear_database
+
+import os
 
 @fixture(autouse=True)
-def empty_timers():
-    veachron.persistence.timers = {}
+def set_db_connection():
+    os.environ['DB_HOST'] = 'localhost'
+    os.environ['DB_USER'] = 'user'
+    os.environ['DB_PASSWORD'] = 'password'
+
+    clear_database()
+    initialize_database()
 
 def test__get_timing_entry_id__single_call__works_as_expected():
     result = get_timing_entry_id()
@@ -63,4 +67,3 @@ def test__list_timings__with_timers_with_timings__returns_correct_total_time():
 
     assert a.total_time == a_a_end + a_b_end - a_a_start - a_b_start
     assert b.total_time == b_a_end + b_b_end - b_a_start - b_b_start
-"""

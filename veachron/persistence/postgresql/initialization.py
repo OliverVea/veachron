@@ -9,3 +9,7 @@ def initialize_database():
     postgresql.execute(CREATE_TIMER_TABLE)
     postgresql.execute(CREATE_TIMING_TABLE)
     postgresql.commit()
+
+def clear_database():
+    postgresql.execute('DROP TABLE IF EXISTS timing, timer')
+    postgresql.commit()
