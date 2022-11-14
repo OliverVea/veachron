@@ -10,13 +10,14 @@ from flask_restx import Resource
 def _get_or_none(source, key: str):
     return source[key] if key in source else None
 
-@namespace.route('/add-entry')
+@namespace.route('/<timerId>/timings/add-entry')
+@namespace.param('timerId', 'id of the timer')
 class AddEntry(Resource):
     @namespace.expect(add_timing_entry_request_model)
     @namespace.marshal_with(add_timing_entry_response_model)
-    def post(self):
+    def post(self, timerId: str):
         timing_entry_id = add_timing_entry(
-            timer_id=request.json['timerId'],
+            timer_id=timerId,
             timer_parent_id=_get_or_none(request.json, 'timerParentId'),
             timing_id=_get_or_none(request.json, 'timingId'),
             timestamp=_get_or_none(request.json, 'timestamp'),
@@ -24,14 +25,15 @@ class AddEntry(Resource):
 
         return {'timingId': timing_entry_id}
 
-
-@namespace.route('/add-exit')
+@namespace.route('/<timerId>/timings/<timingId>/add-exit')
+@namespace.param('timerId', 'id of the timer')
+@namespace.param('timingId', 'used to match the exit with an entry')
 class AddExit(Resource):
     @namespace.expect(add_timing_exit_request_model)
-    def post(self):
+    def post(self, timerId: str, timingId: str):
         add_timing_exit(
-            timer_id=request.json['timerId'],
-            timing_id=request.json['timingId'],
+            timer_id=timerId,
+            timing_id=timingId,
             timestamp=_get_or_none(request.json, 'timestamp'))
 
 def map_timer_tree(tree: TimerTree, scaling: float):
@@ -53,5 +55,4 @@ class ListTimings(Resource):
         trees = [map_timer_tree(tree, scaling) for tree in trees]
         response = jsonify(*trees)
         response.headers.add('Access-Control-Allow-Origin', '*')
-        #print(response.data.decode('utf-8'))
         return response

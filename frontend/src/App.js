@@ -4,7 +4,7 @@ import TimerListElement from './components/TimerListElement';
 
 function App() {
   const hostname = 'http://api.localhost'
-  const url = hostname + '/api/timings/list-timings'
+  const url = hostname + '/api/timers/list-timings'
   const [timings, setTimings] = useState([{}])
 
   useEffect(() => {
