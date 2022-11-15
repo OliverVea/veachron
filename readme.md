@@ -1,51 +1,32 @@
-# Installation #
-(installation comments go here)
+# Introduction
+veachron is a web application which can be used for timing anything that can make http requests.
 
-# Using veachron #
-(documentation on how to use the application goes here)
+The project is described on my [personal project page](https://olivervea.github.io/posts/veachron/), which describes installation, configuration and usage of the application.
 
-## Running the application ##
-(documentation on how to run the application goes here)
+This readme.md describes how to install and use the source code of the application.
 
-### Using Python ###
-()
+# Installation
 
-### Using Docker ###
-()
+Firstly, clone the repository:
 
-## Using the API ##
-(api documentation including link goes here)
+```bash
+git clone https://github.com/OliverVea/veachron.git
+```
 
-## Server UI ##
-(server ui documentation goes here)
+Navigate to the directory:
 
-## Console UI ##
-(console ui documentation goes here)
+```bash
+cd veachron
+```
 
-# Contributing #
-This is 95% a demonstation project, so there is currently no need for any contributors. Ideas are definitely welcome, though!
+Use the `docker-compose.yaml` file to spin up the application:
 
-# To Do #
-These are the current future goals for veachron in chronological order.
+```bash
+docker compose up --build
+```
 
-## Immediate Plan ##
-1. ~~Make Github repo~~
-   1. ~~Disallow from pushing to master~~
-1. Make Github actions
-   1. ~~Run tests on PRs~~
-   1. ~~Make and publish python module~~
-   1. Make and publish docker image based on python module
-   1. Publish C# NSwag SDK nuget package
-   1. Publish Python SDK module
-1. Deploy to AWS ECS
+The `--build` flag can be omitted to use prebuilt images from Docker Hub.
 
-## Other Goals ##
-1. Adding configuration through .env file
-   1. Import in docker-compose.yml
-   1. Import in python module using load_env()
-1. Github version number generation
-1. Console app for showing timings
-1. SQL Persistence layer
-1. Nice index page
-1. FE for showing timings
-1. Hugo documentation rendering
+# Usage
+
+After spinning up the application, it can be reaced at [http://ui.localhost](http://ui.localhost) for the UI and [http://api.localhost](http://api.localhost) for the API.
