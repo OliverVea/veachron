@@ -19,7 +19,7 @@ Navigate to the directory:
 cd veachron
 ```
 
-Use the `docker-compose.yaml` file to spin up the application:
+Use the `docker-compose.yml` file to spin up the application:
 
 ```bash
 docker compose up --build
